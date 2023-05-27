@@ -2,6 +2,7 @@ import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import * as Icon from "react-native-feather";
 import { themeColor } from '../theme';
+import DishRow from '../components/DishRow';
 
 export default function RestaurantScreen() {
   const { params } = useRoute();
@@ -46,7 +47,9 @@ export default function RestaurantScreen() {
         <View className="pb-36 bg-white">
           <Text className="px-4 py-4 text-2xl font-bold">Menu</Text>
           {/* dishes */}
-          
+          {
+            item.dishes.map((dish, id) => <DishRow item={{ ...dish }} key={id} />)
+          }
         </View>
       </ScrollView>
     </View>
