@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React from 'react'
 import { themeColor } from '../theme'
+import RestaurantCard from './RestaurantCard'
 
 export default function FeatureRow({id, title, restaurants, description}) {
   return (
@@ -32,7 +33,10 @@ export default function FeatureRow({id, title, restaurants, description}) {
         {
             restaurants.map((restaurant, id) => {
                 return (
-                    <View></View>
+                    <RestaurantCard 
+                        item={restaurant}
+                        key={id}
+                    />
                 )
             })
         }
