@@ -1,8 +1,9 @@
-import { View, Text, StatusBar, TextInput } from 'react-native'
+import { View, Text, StatusBar, TextInput, ScrollView } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 import * as Icon from "react-native-feather";
 import { themeColor } from '../theme';
+import Categories from '../components/Categories';
 
 
 export default function HomeScreen() {
@@ -25,6 +26,13 @@ export default function HomeScreen() {
             </View>
         </View>
 
+
+        {/* main */}
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }}>
+            
+            {/* categories */}
+            <Categories />
+        </ScrollView>
     </SafeAreaView>
   )
 }
