@@ -2,6 +2,7 @@ import { View, Text, StatusBar, TextInput } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native'
 import * as Icon from "react-native-feather";
+import { themeColor } from '../theme';
 
 
 export default function HomeScreen() {
@@ -19,7 +20,7 @@ export default function HomeScreen() {
                     <Text className="text-gray-600">New York, NYC</Text>
                 </View>
             </View>
-            <View className="p-3 bg-gray-300 rounded-full">
+            <View style={{ backgroundColor: themeColor.bgColor(1) }} className="p-3 bg-gray-300 rounded-full">
                 <Icon.Sliders height='20' width='20' strokeWidth={2.5} stroke='white' />
             </View>
         </View>
