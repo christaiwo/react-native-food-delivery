@@ -4,12 +4,20 @@ import * as Icon from "react-native-feather";
 import { themeColor } from '../theme';
 import DishRow from '../components/DishRow';
 import CartIcon from '../components/CartIcon';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setRestaurant } from '../slices/RestaurantSlice';
 
 export default function RestaurantScreen() {
   const { params } = useRoute();
   let item = params;
   const navigation = useNavigation();
-  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if(item && item.id){
+      dispatch(setRestaurant({...item}))
+    }
+  }, []);
   return (
     <View>
       <CartIcon/>
