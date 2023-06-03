@@ -1,32 +1,34 @@
 import axios from "axios";
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const token = await AsyncStorage.getItem('ACCESS_TOKEN');
 
 const axiosClient = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/v1',
+  baseURL: 'https://christaiwo.tk/api/v1',
 });
 
+axiosClient.interceptors.request.use(async (config) => {
+  const token = await AsyncStorage.getItem('ACCESS_TOKEN');
+  config.headers.Authorization = {
+    "Content-Type": "application/json",
+    'Accept': "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+  return config;
+});
 
-axiosClient.interceptors.request.use((AxiosRequestConfig) => {
-    AxiosRequestConfig.headers.Authorization = `Bearer ${token}`;
-
-    return AxiosRequestConfig;
-})
-
-
-axiosClient.interceptors.response.use((AxiosResponse) => {
-    return AxiosResponse;
-}, (error) => {
+axiosClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
     try {
-        const{response} = error;
-
-        if(response === 401){
-            AsyncStorage.removeItem('ACCESS_TOKEN')
-        }
+      const { response } = error;
+      if (response.status === 401) {
+        await AsyncStorage.removeItem('ACCESS_TOKEN');
+      }
     } catch (e) {
-        console.log(e);
-    }throw error
-})
+      console.log(e);
+    }
+    throw error;
+  }
+);
 
 export default axiosClient;

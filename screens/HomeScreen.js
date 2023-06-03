@@ -7,7 +7,6 @@ import Categories from '../components/Categories';
 import { featured } from '../constants';
 import FeatureRow from '../components/FeatureRow';
 
-
 export default function HomeScreen() {
   return (
     <SafeAreaView>
